@@ -90,7 +90,28 @@ public class Main {
         for (Rental rental1 : member1.getHistory()) {
 //            System.out.println(rental1);
         }
-        
+        Inventory inventory = new Inventory();
+
+
+        inventory.addItem(skate3);
+
+
+//        System.out.println("Försöker starta uthyrning...");
+        Rental rental2 = rentalService.startRental(member2, skate3, LocalDate.now(), standardPricePolicy);
+
+        if (rental2 != null) {
+//            System.out.println("Uthyrning lyckades!");
+
+            // Avsluta uthyrningen efter några dagar
+            rentalService.endRental(rental2, LocalDate.now().plusDays(5), standardPricePolicy);
+        } else {
+//            System.out.println("Uthyrning kunde inte startas.");
+        }
+
+        System.out.println("Uthyrningshistorik för " + member2.getName() + ":");
+        for (Rental r : member2.getHistory()) {
+//            System.out.println(r);
+        }
 
 
     }
