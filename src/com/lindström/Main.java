@@ -2,20 +2,16 @@ package com.lindström;
 
 import com.lindström.entity.*;
 import com.lindström.pricing.JuniorPricePolicy;
-import com.lindström.pricing.PricePolicy;
 import com.lindström.pricing.StandardPricePolicy;
+import com.lindström.service.MembershipService;
 import com.lindström.service.RentalService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 
 
     public static void main(String[] args) {
-
 
 
         Member member1 = new Member("Anna Bengtsson", "Junior");
@@ -30,8 +26,6 @@ public class Main {
 //        System.out.println(memberRegistry.listMembers());
         Member m1 = memberRegistry.findMemberById(1);
 //        System.out.println(m1);
-
-
 
 
 //            System.out.println(member2.getId() + " " + member2.getName());
@@ -56,33 +50,48 @@ public class Main {
 //        System.out.println(rent2);
 
 
-
-
-
-            HockeyStick stick1 = new HockeyStick(1, "Bauer Nexus", "Junior", "Left", "Composite");
-            HockeyStick stick2 = new HockeyStick(2, "CCN", "85", "Right", "Composite");
-            HockeyStick stick3 = new HockeyStick(3, "Bauer", "80", "Left", "Composite");
-            HockeyStick stick4 = new HockeyStick(4, "CCN", "85", "Left", "Composite");
+        HockeyStick stick1 = new HockeyStick(1, "Bauer Nexus", "Junior", "Left", "Composite");
+        HockeyStick stick2 = new HockeyStick(2, "CCN", "85", "Right", "Composite");
+        HockeyStick stick3 = new HockeyStick(3, "Bauer", "80", "Left", "Composite");
+        HockeyStick stick4 = new HockeyStick(4, "CCN", "85", "Left", "Composite");
 //            System.out.println(stick4.getInfo() + " " + stick4.isAvailable());
 //            System.out.println(stick1.getFlex() + " " + stick1.isAvailable());
 
-            ProtectiveGear gear1 = new ProtectiveGear(1, "Bauer", "Hjälm", "57");
-            ProtectiveGear gear2 = new ProtectiveGear(2, "Bauer", "Knäskydd", "M");
-            ProtectiveGear gear3 = new ProtectiveGear(3, "Bauer", "Halsslydd", "S");
+        ProtectiveGear gear1 = new ProtectiveGear(1, "Bauer", "Hjälm", "57");
+        ProtectiveGear gear2 = new ProtectiveGear(2, "Bauer", "Knäskydd", "M");
+        ProtectiveGear gear3 = new ProtectiveGear(3, "Bauer", "Halsslydd", "S");
 //            System.out.println(gear1.getInfo() + " " + gear1.isAvailable());
 //            System.out.println(gear2.getInfo() + " " + gear2.isAvailable());
 
 
-            Inventory.addItem(new Skate(1, "Bauer Vapor", 42, "Bauer"));
-            Inventory.addItem(new HockeyStick(2, "CCM Ribcor", "85", "Left", "Komposit"));
-            Inventory.addItem(new ProtectiveGear(3, "Bauer Supreme", "Axelskydd", "L"));
+        Inventory.addItem(new Skate(1, "Bauer Vapor", 42, "Bauer"));
+        Inventory.addItem(new HockeyStick(2, "CCM Ribcor", "85", "Left", "Komposit"));
+        Inventory.addItem(new ProtectiveGear(3, "Bauer Supreme", "Axelskydd", "L"));
 //            System.out.println("hämta items " + Inventory.getItems());
 
 
+        MembershipService service = new MembershipService();
+
+//        service.upgradeLevel(member1);
+//        System.out.println(service);
+//        service.upgradeLevel(member2);
+//        System.out.println(service);
+//        service.upgradeLevel(member3);
+//        System.out.println(service);
+
+        RentalService rentalService = new RentalService();
+        Rental rental = rentalService.startRental(member2, skate1, LocalDate.now(), juniorPricePolicy);
+//        System.out.println(rental);
+
+        member1.addRental(rent);
+        member2.addRental(rent);
+
+        System.out.println("Historik för medlem " + member1.getName() + ":");
+        for (Rental rental1 : member1.getHistory()) {
+//            System.out.println(rental1);
+        }
+        
 
 
- 
     }
-
-
 }
