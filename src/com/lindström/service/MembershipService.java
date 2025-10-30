@@ -8,8 +8,9 @@ public class MembershipService {
             member.setLevel("Standard");
             System.out.println(member.getName() + " är nu uppgraderad till Standardmedlem!");
 
+        } else {
+            System.out.println(member.getName() + " är redan Standardmedlem!");
         }
-
 
     }
 }

@@ -11,8 +11,12 @@ import java.time.LocalDate;
 public class RentalService {
     private final Inventory inventory;
 
-    public RentalService(Inventory inventory) {
+    private RentalService(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public RentalService() {
+        this.inventory = new Inventory();
     }
 
     public Rental startRental(Member member, Item item, LocalDate startDate, PricePolicy pricePolicy) {
@@ -22,7 +26,7 @@ public class RentalService {
         }
         item.rentOut();
         Rental rental = new Rental(member, item, startDate);
-//        member.addRental(rental);
+        member.addRental(rental);
         System.out.println("Uthyrning startad: " + item.getName() + " till " + member.getName());
         return rental;
     }

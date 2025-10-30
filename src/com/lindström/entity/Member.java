@@ -10,13 +10,13 @@ public class Member {
     private String level;
     private int id;
     private static int nextId = 1;
-//    private final List<Rental> rentalHistory;
-//    private PricePolicy pricePolicy;
+    private final List<Rental> rentalHistory;
+    private PricePolicy pricePolicy;
 
     public Member(String name, String level) {
         this.id = nextId++;
         this.name = name;
-//        this.rentalHistory = new ArrayList<>();
+        this.rentalHistory = new ArrayList<>();
         this.level = level;
     }
 
@@ -40,12 +40,12 @@ public class Member {
     }
 
 
-//    public List<Rental> getHistory() {
-//        return history;
-//    }
-//    public void addRental(Rental rental) {
-//        history.add(rental);
-//    }
+    public List<Rental> getHistory() {
+        return new ArrayList<>(rentalHistory);
+    }
+    public void addRental(Rental rental) {
+        rentalHistory.add(rental);
+    }
 
     @Override
     public String toString() {
