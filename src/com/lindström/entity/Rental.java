@@ -33,4 +33,5 @@ public class Rental {
         this.rentedItems = rentedItems;
     }
 
+
 }

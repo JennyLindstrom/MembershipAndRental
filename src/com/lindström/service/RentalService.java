@@ -13,6 +13,7 @@ public class RentalService implements PricePolicy {
     private final Rental rental;
     private final Map<Item, Rental> rentedItems;
 
+
     public RentalService(Rental rental) {
         this.rental = rental;
         this.rentedItems = rental.getRentedItems();
