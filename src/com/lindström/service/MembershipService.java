@@ -1,15 +1,20 @@
 package com.lindström.service;
 
-import com.lindström.entity.Member;
+import com.lindström.pricing.JuniorPricePolicy;
+import com.lindström.pricing.StandardPricePolicy;
 
 public class MembershipService {
-    public void upgradeLevel(Member member) {
-        if ("Junior".equalsIgnoreCase(member.getLevel())) {
-            member.setLevel("Standard");
-            System.out.println(member.getName() + " är nu uppgraderad till Standardmedlem!");
+    private final StandardPricePolicy standardPricePolicy = new StandardPricePolicy();
+    private final JuniorPricePolicy juniorPricePolicy = new JuniorPricePolicy();
 
-        } else {
-            System.out.println(member.getName() + " är redan Standardmedlem!");
+    public double calculatePrice(int days, String strategyType) {
+        switch (strategyType.toLowerCase()) {
+            case "standard":
+                return standardPricePolicy.calculatePrice(days);
+            case "junior":
+                return juniorPricePolicy.calculatePrice(days);
+            default:
+                throw new IllegalArgumentException("Ogiltlig medlemskapssnivå");
         }
 
     }

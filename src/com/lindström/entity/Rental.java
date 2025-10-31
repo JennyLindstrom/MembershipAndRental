@@ -1,51 +1,36 @@
 package com.lindström.entity;
 
-import com.lindström.pricing.PricePolicy;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Rental {
-    private Member member;
-    private Item item;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private double totalCost;
-    private List<Rental> activeRentals = new ArrayList<>();
+    private final Member member;
+    private final int days;
+    private Map<Item, Rental> rentedItems = new HashMap<>();
 
 
-    public Rental(Member member, Item item, LocalDate startDate) {
+    public Rental(Member member, int days) {
         this.member = member;
-        this.item = item;
-        this.startDate = startDate;
-
+        this.days = days;
 
     }
-    public void close(LocalDate endDate, PricePolicy policy) {
-        this.endDate = endDate;
-        int days = (int) (endDate.toEpochDay() - startDate.toEpochDay());
-        int day = (int) (endDate.toEpochDay() - startDate.toEpochDay());
-        double pricePolicy = policy.calculatePrice(item, day);
-        item.returnItem();
 
-    }
-    public double getTotalCost() {
-        return totalCost;
-    }
-    public Item getItem() {
-        return item;
+    public Member getMember() {
+        return member;
     }
 
-    private LocalDate getEndDate() {
-        return endDate;
+
+    public int getDays() {
+        return days;
     }
 
-    @Override
-    public String toString() {
-        return item.getName() + " hyrd av " + member.getName() + " från " + startDate + (endDate != null ? (" till " + endDate + ", kostnad: " + totalCost + " kr") : "");
+
+    public Map<Item, Rental> getRentedItems() {
+        return rentedItems;
     }
 
-    public void close(LocalDate localDate) {
+    public void setRentedItems(Map<Item, Rental> rentedItems) {
+        this.rentedItems = rentedItems;
     }
+
 }

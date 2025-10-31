@@ -1,12 +1,12 @@
 package com.lindström.entity;
 
-public class ProtectiveGear extends Item{
+public class ProtectiveGear extends Item {
 
-    private String type;
-    private String size;
+    private final String type;
+    private final String size;
 
-    public ProtectiveGear (int id, String Name, String type, String size){
-        super(id,Name);
+    public ProtectiveGear(double dailyPrice, String name, String type, String size) {
+        super(dailyPrice, name);
         this.type = type;
         this.size = size;
 
@@ -21,7 +21,11 @@ public class ProtectiveGear extends Item{
     }
 
     @Override
-    public String getInfo() {
-        return "Skydd: " + name + " (" + type + ", storlek: " + size + ")";
+    public String toString() {
+        return "ProtectiveGear{" +
+                "name='" + name + '\'' +
+                ", size='" + size + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

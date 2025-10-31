@@ -1,22 +1,47 @@
 package com.lindström.entity;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MemberRegistry {
-    private static final Map<Integer, Member> members = new HashMap<>();
+    private final List<Member> memberList = new ArrayList<>();
 
 
-    public static void addMember(Member member) {
-        members.put(member.getId(), member);
+    public MemberRegistry() {
+        initializeMembers();
+    }
+
+
+    public void addMember(Member member) {
+        memberList.add(member);
     }
 
     public Member findMemberById(int id) {
-        return members.get(id);
+        return memberList.get(id);
     }
 
-    public Map listMembers() {
-        return members;
+    public List<Member> listMembers() {
+        return memberList;
     }
+
+    private void initializeMembers() {
+        Member member1 = new Member("Anna Bengtsson", "Junior", new ArrayList<>());
+        Member member2 = new Member("Julia Bengtsson", "Senior", new ArrayList<>());
+        Member member3 = new Member("Adam Bengtsson", "Junior", new ArrayList<>());
+        Member member4 = new Member("Anders Bengtsson", "Senior", new ArrayList<>());
+
+        addMember(member1);
+        addMember(member2);
+        addMember(member3);
+        addMember(member4);
+    }
+
+
 }
+
+
+
+
+
+

@@ -1,37 +1,36 @@
 package com.lindström.service;
 
-import com.lindström.entity.Inventory;
+
 import com.lindström.entity.Item;
 import com.lindström.entity.Member;
 import com.lindström.entity.Rental;
 import com.lindström.pricing.PricePolicy;
 
-import java.time.LocalDate;
+import java.util.Map;
 
-public class RentalService {
-    private final Inventory inventory;
+public class RentalService implements PricePolicy {
 
-    private RentalService(Inventory inventory) {
-        this.inventory = inventory;
+    private final Rental rental;
+    private final Map<Item, Rental> rentedItems;
+
+    public RentalService(Rental rental) {
+        this.rental = rental;
+        this.rentedItems = rental.getRentedItems();
     }
 
-    public RentalService() {
-        this.inventory = new Inventory();
+
+    @Override
+    public double calculatePrice(int days) {
+        return 0;
+
     }
 
-    public Rental startRental(Member member, Item item, LocalDate startDate, PricePolicy pricePolicy) {
-        if (!item.isAvailable()) {
-            System.out.println("Utrustningen är redan uthyrd.");
-            return null;
+    public double calculatePrice(Item item, int days, Member member) {
+        if (item == null || item.getBasePrice(days) <= 0) {
+            System.out.println("Varning: Inget föremål eller felaktigt pris: " + item);
+            return 0;
         }
-        item.rentOut();
-        Rental rental = new Rental(member, item, startDate);
-        member.addRental(rental);
-        System.out.println("Uthyrning startad: " + item.getName() + " till " + member.getName());
-        return rental;
+        return item.getBasePrice(days);
     }
-    public void endRental(Rental rental, LocalDate endDate, PricePolicy pricePolicy) {
-        rental.close(endDate, pricePolicy);
-        System.out.println("Uthyrning avslutad. Kostnad: " + rental.getTotalCost() + " kr");
-    }
+
 }

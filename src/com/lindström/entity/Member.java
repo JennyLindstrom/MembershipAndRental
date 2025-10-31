@@ -1,7 +1,5 @@
 package com.lindström.entity;
 
-import com.lindström.pricing.PricePolicy;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +9,20 @@ public class Member {
     private int id;
     private static int nextId = 1;
     private final List<Rental> rentalHistory;
-    private PricePolicy pricePolicy;
 
-    public Member(String name, String level) {
+
+    public Member(String name, String level, List<Rental> rentalHistory) {
         this.id = nextId++;
         this.name = name;
         this.rentalHistory = new ArrayList<>();
+        this.level = level;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
         this.level = level;
     }
 
@@ -28,30 +34,33 @@ public class Member {
         this.name = name;
     }
 
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String standard) {
-    }
-
     public int getId() {
         return id;
     }
 
-
-    public List<Rental> getHistory() {
-        return new ArrayList<>(rentalHistory);
+    public void setId(int id) {
+        this.id = id;
     }
-    public void addRental(Rental rental) {
-        rentalHistory.add(rental);
+
+    public static int getNextId() {
+        return nextId;
+    }
+
+    public static void setNextId(int nextId) {
+        Member.nextId = nextId;
+    }
+
+    public List<Rental> getRentalHistory() {
+        return rentalHistory;
     }
 
     @Override
     public String toString() {
-        return name + " (" + level + ")";
+        return "Member{" +
+                "name='" + name + '\'' +
+                ", level='" + level + '\'' +
+                ", id=" + id +
+                ", rentalHistory=" + rentalHistory +
+                '}';
     }
-
-
-
 }
