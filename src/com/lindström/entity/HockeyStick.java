@@ -1,13 +1,13 @@
 package com.lindström.entity;
 
-public class HockeyStick extends Item{
+public class HockeyStick extends Item {
 
-    private String flex;
-    private String hand;
-    private String material;
+    private final String flex;
+    private final String hand;
+    private final String material;
 
-    public HockeyStick(int id, String name, String flex, String hand, String material) {
-        super(id, name);
+    public HockeyStick(double basePrice, String name, String flex, String hand, String material) {
+        super(basePrice, name);
         this.flex = flex;
         this.hand = hand;
         this.material = material;
@@ -26,7 +26,12 @@ public class HockeyStick extends Item{
     }
 
     @Override
-    public String getInfo() {
-        return "Klubba: " + name + " (" + material + ", flex: " + flex + ", hand: " + hand + ")";
+    public String toString() {
+        return "HockeyStick{" +
+                "flex='" + flex + '\'' +
+                ", hand='" + hand + '\'' +
+                ", material='" + material + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

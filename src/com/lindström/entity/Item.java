@@ -1,49 +1,36 @@
 package com.lindström.entity;
 
 public abstract class Item {
-    public double getBasePrice;
-    protected int id;
+    private final double basePrice;
+
     protected String name;
-    protected boolean available = true;
 
 
-    public Item(int id, String name) {
-        this.id = id;
+    public Item(double basePrice, String name) {
+        this.basePrice = basePrice;
         this.name = name;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void rentOut() {
-        this.available = false;
-    }
-
-    public void returnItem() {
-        this.available = true;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {
         return name;
-
     }
 
-    public double getBasePrice() {
-        return getBasePrice;
+
+    public double getBasePrice(int days) {
+        return basePrice * days;
     }
 
-    public void setGetBasePrice(double getBasePrice) {
-        this.getBasePrice = getBasePrice;
+    @Override
+    public String toString() {
+        return "Item{" +
+                "basePrice=" + basePrice +
+                ", name='" + name + '\'' +
+                '}';
     }
-
-    public abstract String getInfo();
-
 }
+
+
+
 
 
 

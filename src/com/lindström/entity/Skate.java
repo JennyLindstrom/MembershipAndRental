@@ -1,14 +1,15 @@
 package com.lindström.entity;
 
-public class Skate extends Item{
+public class Skate extends Item {
 
-    private int size;
-    private String brand;
+    private final int size;
+    private final String brand;
 
-    public Skate(int id, String name, int size, String Brand) {
-        super(id, name);
+    public Skate(double dailyPrice, String name, int size, String Brand) {
+        super(dailyPrice, name);
         this.brand = Brand;
         this.size = size;
+
 
     }
 
@@ -21,7 +22,11 @@ public class Skate extends Item{
     }
 
     @Override
-    public String getInfo() {
-        return "Skridsko " + name + " (" + brand + "), storlek " + size;
+    public String toString() {
+        return "Skate{" +
+                "size=" + size +
+                ", brand='" + brand + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
