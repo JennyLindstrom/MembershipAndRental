@@ -1,10 +1,14 @@
 package com.lindström.pricing;
 
+import com.lindström.item.Item;
+
 public class JuniorPricePolicy implements PricePolicy {
 
+    private static final double BASE_DAY_PRICE = 200.0;
+    private static final double DISCOUNT = 0.2;
+
     @Override
-    public double calculatePrice(int days) {
-        double v = days * 75.0;
-        return v;
+    public double calculatePrice(Item item, int days) {
+        return BASE_DAY_PRICE * (1.0 - DISCOUNT) * days;
     }
 }
