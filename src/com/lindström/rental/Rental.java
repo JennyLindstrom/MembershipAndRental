@@ -7,9 +7,9 @@ import java.time.LocalDate;
 
 
 public class Rental {
-    private Member member;
-    private Item item;
-    private LocalDate startDate;
+    private final Member member;
+    private final Item item;
+    private final LocalDate startDate;
     private LocalDate endDate;
     private double rentalPrice;
 
