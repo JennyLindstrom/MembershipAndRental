@@ -19,7 +19,6 @@ public class MembershipService {
     }
 
 
-
     public List<Member> listAllMembers() {
         return memberRegistry.listMembers();
     }
@@ -45,7 +44,6 @@ public class MembershipService {
             return MemberRegistry.StatusLevel.STANDARD;
         }
     }
-
 
 
 }

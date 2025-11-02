@@ -23,8 +23,7 @@ public class Main {
         addSampleData(inventory, membershipService);
         Menu menu = new Menu(inventory, memberRegistry, rentalService, membershipService);
         menu.start();
-
-
+        
     }
 
     private static void addSampleData(Inventory inventory, MembershipService membershipService) {
