@@ -18,15 +18,7 @@ public class MembershipService {
         return memberRegistry.removeMember(memberId);
     }
 
-    public boolean updateMemberStatus(int memberId, String newStatusStr) {
-        Member m = memberRegistry.getMember(memberId);
-        if (m != null) {
-            MemberRegistry.StatusLevel status = parseStatusLevel(newStatusStr);
-            m.setStatusLevel(status);
-            return true;
-        }
-        return false;
-    }
+
 
     public List<Member> listAllMembers() {
         return memberRegistry.listMembers();
@@ -53,6 +45,7 @@ public class MembershipService {
             return MemberRegistry.StatusLevel.STANDARD;
         }
     }
+
 
 
 }

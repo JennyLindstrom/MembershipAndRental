@@ -29,5 +29,11 @@ public class ProtectiveGear extends Item {
         this.size = size;
     }
 
-
+    @Override
+    public String toString() {
+        return "ProtectiveGear{" +
+                "size='" + size + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }
