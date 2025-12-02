@@ -54,7 +54,7 @@ public class RentalService {
         return rental;
     }
 
-    public double finishRental(Rental rental, LocalDate returnDate) {
+    public double endRental(Rental rental, LocalDate returnDate) {
         Item item = rental.getItem();
         Member member = rental.getMember();
 

@@ -2,7 +2,7 @@ package com.lindström;
 
 import com.lindström.item.HockeyStick;
 import com.lindström.item.Inventory;
-import com.lindström.item.ProtectiveGear;
+import com.lindström.item.Helmet;
 import com.lindström.item.Skate;
 import com.lindström.member.Member;
 import com.lindström.member.MemberRegistry;
@@ -82,10 +82,10 @@ public class Menu {
         boolean inMenu = true;
         while (inMenu) {
             System.out.println("\n--- Utrustningsmeny ---");
-            System.out.println("1. Lägg till skyddsutrusting");
+            System.out.println("1. Lägg till hjälm");
             System.out.println("2. Lägg till skridsko");
             System.out.println("3. Lägg till klubba");
-            System.out.println("4. Lista tillgänglig skyggsutrustning");
+            System.out.println("4. Lista tillgängliga hjälmar");
             System.out.println("5. Lista tillgängliga skridskor");
             System.out.println("6. Lista tillgängliga klubbor");
             System.out.println("0. Tillbaka");
@@ -94,10 +94,10 @@ public class Menu {
             int choice = readInt();
 
             switch (choice) {
-                case 1 -> addProtectiveGear();
+                case 1 -> addHelmet();
                 case 2 -> addSkate();
                 case 3 -> addHockeyStick();
-                case 4 -> listAvailableProtectiveGear();
+                case 4 -> listAvailableHemlet();
                 case 5 -> listAvailableSkate();
                 case 6 -> listAvailableHockeyStick();
                 case 0 -> inMenu = false;
@@ -110,7 +110,7 @@ public class Menu {
         boolean inMenu = true;
         while (inMenu) {
             System.out.println("\n--- Uthyrningsmeny ---");
-            System.out.println("1. Hyr skyddsutrustning");
+            System.out.println("1. Hyr hjälm");
             System.out.println("2. Hyr skridskor");
             System.out.println("3. Hyr klubba");
             System.out.println("4. Avsluta hyrning");
@@ -122,10 +122,10 @@ public class Menu {
             int choice = readInt();
 
             switch (choice) {
-                case 1 -> rentProtectiveGear();
+                case 1 -> rentHelmet();
                 case 2 -> rentSkate();
                 case 3 -> rentHockeyStick();
-                case 4 -> finishRental();
+                case 4 -> endRental();
                 case 5 -> listActiveRentals();
                 case 6 -> showTotalRevenue();
                 case 0 -> inMenu = false;
@@ -188,47 +188,45 @@ public class Menu {
         }
     }
 
-    private void addProtectiveGear() {
-        System.out.print("Typ av skydd:  ");
-        String desc = scanner.nextLine();
+    private void addHelmet() {
         System.out.print("Märke: ");
-        String type = scanner.nextLine();
+        String brand = scanner.nextLine();
         System.out.print("Storlek: ");
         String size = scanner.nextLine();
-        ProtectiveGear gear = new ProtectiveGear(desc, type, size);
+        Helmet gear = new Helmet(brand, size);
         inventory.addItem(gear);
-        System.out.println("Skyddsutrustning tillagd: " + gear);
+        System.out.println("Hjälm tillagd: " + gear);
     }
 
     private void addSkate() {
         System.out.print("Märke: ");
-        String desc = scanner.nextLine();
+        String brand = scanner.nextLine();
         System.out.print("Storlek : ");
         int size = scanner.nextInt();
-        Skate skate = new Skate(desc, size);
+        Skate skate = new Skate(brand, size);
         inventory.addItem(skate);
         System.out.println("Skridsko tillagd: " + skate);
     }
 
     private void addHockeyStick() {
         System.out.print("Märke : ");
-        String desc = scanner.nextLine();
+        String brand = scanner.nextLine();
         System.out.print("Flex på klubban : ");
         String flex = scanner.nextLine();
         System.out.print("Fattnig på klubban : ");
         String hand = scanner.nextLine();
         System.out.print("Material : ");
         String material = scanner.nextLine();
-        HockeyStick stick = new HockeyStick(desc, material, hand, flex);
+        HockeyStick stick = new HockeyStick(brand, material, flex, hand);
         inventory.addItem(stick);
         System.out.println("Hockeykklibba tillagd: " + stick);
     }
 
-    private void listAvailableProtectiveGear() {
-        System.out.println("\n--- Tillgänglig skyddsutrustning ---");
-        for (ProtectiveGear pg : inventory.filterByType(ProtectiveGear.class)) {
-            if (pg.isAvailable()) {
-                System.out.println(pg);
+    private void listAvailableHemlet() {
+        System.out.println("\n--- Tillgängliga hjälmar ---");
+        for (Helmet h : inventory.filterByType(Helmet.class)) {
+            if (h.isAvailable()) {
+                System.out.println(h);
             }
         }
     }
@@ -251,26 +249,26 @@ public class Menu {
         }
     }
 
-    private void rentProtectiveGear() {
+    private void rentHelmet() {
         List<Member> listAllMembers = membershipService.listAllMembers();
-        for  (Member m : listAllMembers) {
+        for (Member m : listAllMembers) {
             System.out.println(m);
         }
-        List<ProtectiveGear> available = inventory.filterByType(ProtectiveGear.class);
+        List<Helmet> available = inventory.filterByType(Helmet.class);
         if (available.isEmpty()) {
-            System.out.println("Ingen skyddsutrustning tillgängligt för uthyrning.");
+            System.out.println("Ingen hjälm tillgängligt för uthyrning.");
             return;
         }
-        System.out.println("\n--- Tillgänglig skyddsutrustning ---");
+        System.out.println("\n--- Tillgängliga hjälmar ---");
         for (int i = 0; i < available.size(); i++) {
-            ProtectiveGear pg = available.get(i);
-            System.out.println((i + 1) + ". " + pg);
+            Helmet h = available.get(i);
+            System.out.println((i + 1) + ". " + h);
         }
         System.out.print("Ange medlems-ID: ");
         int memId = readInt();
-        System.out.print("Välj skyddsutrustning med nummer: ");
+        System.out.print("Välj hjälm med nummer: ");
         int choice = readIntInRange(1, available.size());
-        ProtectiveGear selected = available.get(choice - 1);
+        Helmet selected = available.get(choice - 1);
         System.out.print("Startdatum (ÅÅÅÅ-MM-DD): ");
         LocalDate start = LocalDate.parse(scanner.nextLine());
         System.out.print("Slutdatum (ÅÅÅÅ-MM-DD): ");
@@ -279,13 +277,13 @@ public class Menu {
         if (rental != null) {
             System.out.println("Hyrning genomförd: " + rental);
         } else {
-            System.out.println("Det gick ej att boka. Kontrollera medlems-ID och att skyddutrustningen är ledig!");
+            System.out.println("Det gick ej att boka. Kontrollera medlems-ID och att hjälmen är ledig!");
         }
     }
 
     private void rentSkate() {
         List<Member> listAllMembers = membershipService.listAllMembers();
-        for  (Member m : listAllMembers) {
+        for (Member m : listAllMembers) {
             System.out.println(m);
         }
         List<Skate> available = inventory.filterByType(Skate.class);
@@ -317,7 +315,7 @@ public class Menu {
 
     private void rentHockeyStick() {
         List<Member> listAllMembers = membershipService.listAllMembers();
-        for  (Member m : listAllMembers) {
+        for (Member m : listAllMembers) {
             System.out.println(m);
         }
         List<HockeyStick> available = inventory.filterByType(HockeyStick.class);
@@ -347,7 +345,7 @@ public class Menu {
         }
     }
 
-    private void finishRental() {
+    private void endRental() {
         listActiveRentals();
         System.out.print("Ange utrustnings-ID för hyrning som ska avslutas: ");
         String itemId = scanner.nextLine();
@@ -364,7 +362,7 @@ public class Menu {
         }
         System.out.print("Avslutsdatum (ÅÅÅÅ-MM-DD): ");
         LocalDate retDate = LocalDate.parse(scanner.nextLine());
-        double total = rentalService.finishRental(rental, retDate);
+        double total = rentalService.endRental(rental, retDate);
         System.out.println("Hyra avslutad. Slutpris: " + total + " kr");
     }
 

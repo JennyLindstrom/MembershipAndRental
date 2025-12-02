@@ -7,8 +7,8 @@ public class HockeyStick extends Item {
     private String material;
 
 
-    public HockeyStick(String description, String material, String flex, String hand) {
-        super(description);
+    public HockeyStick(String brand, String material, String flex, String hand) {
+        super(brand);
         this.flex = flex;
         this.hand = hand;
         this.material = material;
@@ -40,10 +40,9 @@ public class HockeyStick extends Item {
 
     @Override
     public String toString() {
-        return "HockeyStick{" +
+        return "Klubba " + super.toString() +
                 "flex='" + flex + '\'' +
-                ", hand='" + hand + '\'' +
-                ", material='" + material + '\'' +
-                '}';
+                ", fattning='" + hand + '\'' +
+                ", material='" + material + '\'';
     }
 }
