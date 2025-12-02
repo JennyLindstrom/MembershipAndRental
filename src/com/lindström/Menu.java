@@ -36,7 +36,7 @@ public class Menu {
             System.out.println("\n--- VALBO HC Medlemsregister och uthyrningsregister ---");
             System.out.println("1. Medlemmar");
             System.out.println("2. Utrustning");
-            System.out.println("3. Uthyrningar");
+            System.out.println("3. Hyra/Avsluta Hyrningar");
             System.out.println("0. Avsluta");
             System.out.print("Ange val: ");
             int choice = readInt();
@@ -88,9 +88,6 @@ public class Menu {
             System.out.println("4. Lista tillgänglig skyggsutrustning");
             System.out.println("5. Lista tillgängliga skridskor");
             System.out.println("6. Lista tillgängliga klubbor");
-            System.out.println("7. Hyr skyddsutrustning");
-            System.out.println("8. Hyr skridskor");
-            System.out.println("9. Hyr klubba");
             System.out.println("0. Tillbaka");
             System.out.print("Ange val: ");
 
@@ -103,9 +100,6 @@ public class Menu {
                 case 4 -> listAvailableProtectiveGear();
                 case 5 -> listAvailableSkate();
                 case 6 -> listAvailableHockeyStick();
-                case 7 -> rentProtectiveGear();
-                case 8 -> rentSkate();
-                case 9 -> rentHockeyStick();
                 case 0 -> inMenu = false;
                 default -> System.out.println("Ogiltigt val, försök igen!");
             }
@@ -116,18 +110,24 @@ public class Menu {
         boolean inMenu = true;
         while (inMenu) {
             System.out.println("\n--- Uthyrningsmeny ---");
-            System.out.println("1. Avsluta hyrning");
-            System.out.println("2. Visa pågående uthyrningar");
-            System.out.println("3. Visa intäkter");
+            System.out.println("1. Hyr skyddsutrustning");
+            System.out.println("2. Hyr skridskor");
+            System.out.println("3. Hyr klubba");
+            System.out.println("4. Avsluta hyrning");
+            System.out.println("5. Visa pågående uthyrningar");
+            System.out.println("6. Visa intäkter");
             System.out.println("0. Tillbaka");
             System.out.print("Ange val: ");
 
             int choice = readInt();
 
             switch (choice) {
-                case 1 -> finishRental();
-                case 2 -> listActiveRentals();
-                case 3 -> showTotalRevenue();
+                case 1 -> rentProtectiveGear();
+                case 2 -> rentSkate();
+                case 3 -> rentHockeyStick();
+                case 4 -> finishRental();
+                case 5 -> listActiveRentals();
+                case 6 -> showTotalRevenue();
                 case 0 -> inMenu = false;
                 default -> System.out.println("Ogiltigt val, försök igen!");
             }
@@ -252,6 +252,10 @@ public class Menu {
     }
 
     private void rentProtectiveGear() {
+        List<Member> listAllMembers = membershipService.listAllMembers();
+        for  (Member m : listAllMembers) {
+            System.out.println(m);
+        }
         List<ProtectiveGear> available = inventory.filterByType(ProtectiveGear.class);
         if (available.isEmpty()) {
             System.out.println("Ingen skyddsutrustning tillgängligt för uthyrning.");
@@ -280,6 +284,10 @@ public class Menu {
     }
 
     private void rentSkate() {
+        List<Member> listAllMembers = membershipService.listAllMembers();
+        for  (Member m : listAllMembers) {
+            System.out.println(m);
+        }
         List<Skate> available = inventory.filterByType(Skate.class);
         if (available.isEmpty()) {
             System.out.println("Inga tillgängliga skridskor för uthyrning.");
@@ -308,6 +316,10 @@ public class Menu {
     }
 
     private void rentHockeyStick() {
+        List<Member> listAllMembers = membershipService.listAllMembers();
+        for  (Member m : listAllMembers) {
+            System.out.println(m);
+        }
         List<HockeyStick> available = inventory.filterByType(HockeyStick.class);
         if (available.isEmpty()) {
             System.out.println("Inga tillgängliga klubbor för uthyrning.");
