@@ -1,15 +1,14 @@
 package com.lindström.item;
 
-import java.util.UUID;
-
 public abstract class Item {
     private final String id;
-    private String description;
+    private static int counter = 1;
+    private String brand;
     private boolean available;
 
-    public Item(String description) {
-        this.id = UUID.randomUUID().toString();
-        this.description = description;
+    public Item(String brand) {
+        this.id = String.valueOf(counter++);
+        this.brand = brand;
         this.available = true;
     }
 
@@ -17,12 +16,12 @@ public abstract class Item {
         return id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public boolean isAvailable() {
@@ -35,11 +34,9 @@ public abstract class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
+        return ": " +
                 "id='" + id + '\'' +
-                ", description='" + description + '\'' +
-                ", available=" + available +
-                '}';
+                ", märke='" + brand + '\'';
     }
 }
 

@@ -2,7 +2,7 @@ package com.lindström;
 
 import com.lindström.item.HockeyStick;
 import com.lindström.item.Inventory;
-import com.lindström.item.ProtectiveGear;
+import com.lindström.item.Helmet;
 import com.lindström.item.Skate;
 import com.lindström.member.MemberRegistry;
 import com.lindström.member.MembershipService;
@@ -23,7 +23,7 @@ public class Main {
         addSampleData(inventory, membershipService);
         Menu menu = new Menu(inventory, memberRegistry, rentalService, membershipService);
         menu.start();
-        
+
     }
 
     private static void addSampleData(Inventory inventory, MembershipService membershipService) {
@@ -41,18 +41,19 @@ public class Main {
 
 
         //Skyddsutrustning
-        inventory.addItem(new ProtectiveGear("Halsskydd", "Bauer", "Small"));
-        inventory.addItem(new ProtectiveGear("Halsskydd", "Bauer", "Medium"));
-        inventory.addItem(new ProtectiveGear("Halsskydd", "CCN", "Large"));
-        inventory.addItem(new ProtectiveGear("Halsskydd", "CCN", "Medium"));
-        inventory.addItem(new ProtectiveGear("Hjälm", "CCN", "Large"));
-        inventory.addItem(new ProtectiveGear("Hjälm", "CCN", "Small"));
-        inventory.addItem(new ProtectiveGear("Hjälm", "Bauer", "Medium"));
-        inventory.addItem(new ProtectiveGear("Hjälm", "Bauer", "Small"));
-        inventory.addItem(new ProtectiveGear("Armbågsskydd", "Bauer", "Small"));
-        inventory.addItem(new ProtectiveGear("Armbågsskydd", "CCN", "Medium"));
-        inventory.addItem(new ProtectiveGear("Armbågsskydd", "CCN", "Medium"));
-        inventory.addItem(new ProtectiveGear("Armbågsskydd", "Bauer", "Large"));
+        inventory.addItem(new Helmet("Medium", "CCN"));
+        inventory.addItem(new Helmet("Small", "Bauer"));
+        inventory.addItem(new Helmet("Large", "CCN"));
+        inventory.addItem(new Helmet("Small", "Bauer"));
+        inventory.addItem(new Helmet("Medium", "CCN"));
+        inventory.addItem(new Helmet("Small", "Bauer"));
+        inventory.addItem(new Helmet("Large", "CCN"));
+        inventory.addItem(new Helmet("Medium", "Bauer"));
+        inventory.addItem(new Helmet("Small", "CCN"));
+        inventory.addItem(new Helmet("Large", "Bauer"));
+        inventory.addItem(new Helmet("Small", "CCN"));
+        inventory.addItem(new Helmet("Medium", "Bauer"));
+
 
         //Klubbor
         inventory.addItem(new HockeyStick("Vapor CCN", "Composite", "85", "Right"));
@@ -76,6 +77,7 @@ public class Main {
         inventory.addItem(new Skate("Jetspeed CCN", 43));
         inventory.addItem(new Skate("Jetspeed CCN", 44));
         inventory.addItem(new Skate("Jetspeed CCN", 36));
+
 
     }
 }

@@ -4,8 +4,8 @@ public class Skate extends Item {
 
     private int size;
 
-    public Skate(String description, int size) {
-        super(description);
+    public Skate(String brand, int size) {
+        super(brand);
         this.size = size;
 
     }
@@ -20,8 +20,7 @@ public class Skate extends Item {
 
     @Override
     public String toString() {
-        return "Skate{" +
-                "size=" + size +
-                '}';
+        return "Skridsko " + super.toString() +
+                "storlek=" + size;
     }
 }
